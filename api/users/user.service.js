@@ -50,10 +50,10 @@ module.exports = ({
     },
 
 
-    verifyUser: (verification_code, callback) =>{
+    verifyUser: (id, callback) =>{
         pool.query(
-            `select * from users where verification_code = ?`,
-            [verification_code],
+            `select * from users where id = ?`,
+            [id],
             (error, results, fields) =>{
                 if(error) {
                     callback(error)

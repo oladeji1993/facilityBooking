@@ -4,7 +4,7 @@ require("dotenv").config();
 
 
 // Client mailer
-async function client(params) {
+async function client(params, otp) {
     let transporter = nodemailer.createTransport(smtpTransport({
         host: "mail.snowfoxng.com",
         tls:{
@@ -139,7 +139,7 @@ async function client(params) {
                             <tr>
                             <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
                                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi ${params.first_name + ' ' + params.last_name},</p>
-                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thank you for registering. Here is your registration verification code &nbsp;<span style="font-weight:bold; font-size:20px">${params.verification_code}</span>. Kindly use this pin to complete your registration.</p>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thank you for registering. Here is your registration verification code &nbsp;<span style="font-weight:bold; font-size:20px">${otp}</span>. Kindly use this pin to complete your registration.</p>
                               
                                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thanks.</p>
                             </td>

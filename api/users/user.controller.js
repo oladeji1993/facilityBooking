@@ -23,9 +23,9 @@ module.exports = {
             const body = req.body;
             const salt = genSaltSync(10)
             body.password = hashSync(body.password, salt)
-            body.verification_code = otp
+            body.verification_code = hashSync(otp.toString(), salt)
             body.verification_status = "pending"
-            mailers.client(body)
+            mailers.client(body, otp)
             create(body, (err, results) =>{
                 if(err){
                     console.log(err)
@@ -37,6 +37,7 @@ module.exports = {
                 return res.status(200).json({
                     success: 1,
                     message: "Registration successful",
+                    id: results.insertId,
                     data: results
                 })
             })
@@ -86,7 +87,7 @@ module.exports = {
 
     verify: (req, res) =>{
         const body = req.body;
-        verifyUser(body.verification_code, (err, results) =>{
+        verifyUser(body.id, (err, results) =>{
             if(err){
                 console.log(err)
             }
@@ -97,7 +98,9 @@ module.exports = {
                         message: "invalid code"
                     }
                 )
-            }else{
+            }
+            const result = compareSync(body.verification_code, results.verification_code);
+            if(result){
                 updateStatus(results, (err, results) =>{
                     if(err){
                         console.log(err)
@@ -111,6 +114,11 @@ module.exports = {
                         message: "Account Verification successful",
                     })
                 })
+                }else{
+                    return res.json({ 
+                        success: 0,
+                        message: "incorrect code",
+                    })
                 }
             });
     }
