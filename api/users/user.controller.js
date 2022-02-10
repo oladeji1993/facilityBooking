@@ -23,7 +23,8 @@ module.exports = {
             const body = req.body;
             const salt = genSaltSync(10)
             body.password = hashSync(body.password, salt)
-            body.verification_code = hashSync(otp.toString(), salt)
+            let stringOtp = otp.toString();
+            body.verification_code = hashSync(stringOtp, salt)
             body.verification_status = "pending"
             mailers.client(body, otp)
             create(body, (err, results) =>{
@@ -36,8 +37,10 @@ module.exports = {
                 }
                 return res.status(200).json({
                     success: 1,
+                    status: 200,
                     message: "Registration successful",
                     id: results.insertId,
+                    email: body.email,
                     data: results
                 })
             })

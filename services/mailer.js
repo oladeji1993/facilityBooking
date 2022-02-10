@@ -22,7 +22,7 @@ async function client(params, otp) {
     let info = await transporter.sendMail({
         from: '"Thrifit" <info@snowfoxng.com>',
         to: `${params.email}`,
-        subject:`One time password(THRIFIT)`,
+        subject:`Confirm your email address`,
         html: `
                         
         <!doctype html>
@@ -138,10 +138,10 @@ async function client(params, otp) {
                         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
                             <tr>
                             <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
-                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi ${params.first_name + ' ' + params.last_name},</p>
-                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thank you for registering. Here is your registration verification code &nbsp;<span style="font-weight:bold; font-size:20px">${otp}</span>. Kindly use this pin to complete your registration.</p>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi ${params.first_name},</p>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thank you for signing up on Thrifit. Kindly enter this verification code to get started &nbsp;<span style="font-weight:bold; font-size:20px">${otp}</span>. Verification code expires after 5 minutes.</p>
                               
-                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thanks.</p>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thanks.<br>Thrifit Team</p>
                             </td>
                             </tr>
                         </table>
@@ -155,13 +155,8 @@ async function client(params, otp) {
                     <div class="footer" style="clear: both; Margin-top: 10px; text-align: center; width: 100%;">
                     <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
                         <tr>
-                        <td class="content-block" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
-                            <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;">thrifit.com <br> 07006664666</span>
-                        </td>
-                        </tr>
-                        <tr>
                         <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
-                            <a href="www.snowfox.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.thrifit.com</a>.
+                            <a href="https://www.thrifit.com/landing" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.thrifit.com</a>.
                         </td>
                         </tr>
                     </table>
