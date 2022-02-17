@@ -15,4 +15,4 @@ app.use("/api/users", userRouter)
 
 
 
-app.listen(process.env.APP, () => console.log(`Listen on port ${process.env.APP}`))
+app.listen(process.env.APP, () => console.log(`Listen on port ${process.env.APP}`));

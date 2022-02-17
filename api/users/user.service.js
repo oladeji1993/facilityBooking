@@ -38,6 +38,33 @@ module.exports = ({
     },
 
 
+    createSellerAlc: (data, callback) => {
+        pool.query(
+            `insert into seller_details(
+                first_name, 
+                last_name,
+                full_address,
+                account_no, 
+                bank_name,
+                seller_status)
+            values(?,?,?,?,?,?)`,
+            [
+                data.first_name,
+                data.last_name,
+                data.full_address,
+                data.account_no,
+                data.bank_name,
+                data.seller_status,
+            ],
+            (error, results, fields) =>{
+                if(error){
+                    return callback(error)
+                }
+                return callback(null, results)
+            }
+        )
+    },
+
     getUserByEmail: (email, callback) =>{
         pool.query(
             `select * from users where email = ?`,

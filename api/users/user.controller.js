@@ -1,5 +1,5 @@
 const pool = require("../../config/database");
-const { create, getUserByEmail, verifyUser, updateStatus } = require('./user.service');
+const { create, createSellerAlc, getUserByEmail, verifyUser, updateStatus } = require('./user.service');
 const mailers = require('../../services/mailer')
 
 
@@ -42,6 +42,39 @@ module.exports = {
                     id: results.insertId,
                     email: body.email,
                     data: results
+                })
+            })
+
+        }
+    })
+
+    },
+
+
+    sellerReg: (req, res) =>{
+        pool.query('SELECT * FROM seller_details WHERE first_name = ? ', req.body.first_name, (err, user) => { 
+        if(user.length > 0){
+            return res.status(500).json({
+                error: 0,
+                message: "User already exist"
+            })
+        }else{
+            const body = req.body;
+            body.seller_status = "registered"
+            createSellerAlc(body, (err, results) =>{
+                if(err){
+                    console.log(err)
+                    return res.status(500).json({
+                        error: 0,
+                        message: "Database connection error"
+                    })
+                }
+                return res.status(200).json({
+                    success: 1,
+                    status: 200,
+                    message: "Information Saved successfully",
+                    data: results,
+                    seller_status: body.seller_status
                 })
             })
 
