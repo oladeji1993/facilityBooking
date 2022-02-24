@@ -59,8 +59,9 @@ module.exports = {
                 message: "User already exist"
             })
         }else{
-            const body = req.body;
+            const body = req.body; 
             body.seller_status = "registered"
+            body.seller_id = 'THS0' + body.user_id
             createSellerAlc(body, (err, results) =>{
                 if(err){
                     console.log(err)
@@ -73,7 +74,7 @@ module.exports = {
                     success: 1,
                     status: 200,
                     message: "Information Saved successfully",
-                    data: results,
+                    seller_id: body.seller_id,
                     seller_status: body.seller_status
                 })
             })
@@ -108,6 +109,7 @@ module.exports = {
                     success: 1,
                     status: 200,
                     message: "login successful",
+                    user_id: results.id,
                     verification_status: results.verification_status,
                     token: jsontoken
                 })
