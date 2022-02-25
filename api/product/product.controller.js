@@ -34,7 +34,6 @@ module.exports = {
 
     availableProducts: (req, res) => {
         getProduct((err, resp)=>{
-            console.log(resp)
             // getAllVendors((err, response)=>{
             //     if(err){
             //         console.log(err);

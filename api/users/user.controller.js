@@ -61,7 +61,7 @@ module.exports = {
         }else{
             const body = req.body; 
             body.seller_status = "registered"
-            body.seller_id = 'THS0' + body.user_id
+            body.seller_id = body.user_id
             createSellerAlc(body, (err, results) =>{
                 if(err){
                     console.log(err)

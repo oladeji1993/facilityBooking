@@ -24,7 +24,6 @@ var storage = multer.diskStorage({
         cb(null, 'upload')
     },
     filename: function (req, file, cb) {    
-        console.log(file)
         cb(null, req.body.seller_id + '-' + file.fieldname + '-' + '' + path.extname(file.originalname))
     }
 }),
