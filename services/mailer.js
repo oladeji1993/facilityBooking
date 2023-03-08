@@ -14,7 +14,7 @@ async function client(params) {
         secure: true,
         auth: {
             user: 'info@snowfoxng.com', 
-            pass: process.env.MAIL_PASSWORD
+            pass: 'Newaccess@2021'
         },
     }));
 
