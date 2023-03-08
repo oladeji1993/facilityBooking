@@ -8,6 +8,8 @@ const productRouter = require("./api/product/product.router")
 const path = require("path")
 var bodyParser = require('body-parser')
 
+const port = 3000
+
 
 
 app.use(cors())
@@ -55,4 +57,4 @@ app.use("/api/product", upload.fields([{ name: 'coverImage', maxCount: 1 }, { na
 
 
 
-app.listen(process.env.APP, () => console.log(`Listen on port ${process.env.APP}`));
+app.listen(process.env.APP || port, () => console.log(`Listen on port ${port}`));
