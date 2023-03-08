@@ -4,7 +4,7 @@ require("dotenv").config();
 
 
 // Client mailer
-async function client(params, otp) {
+async function client(params) {
     let transporter = nodemailer.createTransport(smtpTransport({
         host: "mail.snowfoxng.com",
         tls:{
@@ -20,9 +20,9 @@ async function client(params, otp) {
 
 
     let info = await transporter.sendMail({
-        from: '"Thrifit" <info@snowfoxng.com>',
-        to: `${params.email}`,
-        subject:`Confirm your email address`,
+        from: '"TMP FACILITY BOOKING" <info@snowfoxng.com>',
+        to: 'olanipekunoladeji93@gmail.com',
+        subject:`Booking Details`,
         html: `
                         
         <!doctype html>
@@ -30,7 +30,7 @@ async function client(params, otp) {
         <head>
             <meta name="viewport" content="width=device-width">
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>One time password</title>
+            <title>Facility Booking Email</title>
             <style>
             /* -------------------------------------
                 INLINED WITH htmlemail.io/inline
@@ -122,7 +122,6 @@ async function client(params, otp) {
             </style>
         </head>
         <body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
-            <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">One time password Email</span>
             <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
             <tr>
                 <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
@@ -138,10 +137,19 @@ async function client(params, otp) {
                         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
                             <tr>
                             <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
-                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi ${params.first_name},</p>
-                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thank you for signing up on Thrifit. Kindly enter this verification code to get started &nbsp;<span style="font-weight:bold; font-size:20px">${otp}</span>. Verification code expires after 5 minutes.</p>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi Admin,</p>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">You have a new booking, <br> Find the booking details below.<br></p>
                               
-                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thanks.<br>Thrifit Team</p>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
+                                    <b>Event Title</b>: ${params.event_title}<br>
+                                    <b>Event Day</b>: ${params.event_day}<br>
+                                    <b>Event Date</b>: ${params.event_date}<br>
+                                    <b>Requester</b>: ${params.requester}<br>
+                                    <b>Start Time</b>: ${params.start_time}<br>
+                                    <b>End Time</b>: ${params.end_time}<br>
+                                    <b>No of Participants</b>: ${params.participants}<br>
+                                    <b>Date Requested</b>: ${params.date_requested}<br>
+                                </p>
                             </td>
                             </tr>
                         </table>
@@ -153,13 +161,6 @@ async function client(params, otp) {
 
                     <!-- START FOOTER -->
                     <div class="footer" style="clear: both; Margin-top: 10px; text-align: center; width: 100%;">
-                    <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
-                        <tr>
-                        <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
-                            <a href="https://www.thrifit.com/landing" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.thrifit.com</a>.
-                        </td>
-                        </tr>
-                    </table>
                     </div>
                     <!-- END FOOTER -->
 
@@ -171,7 +172,6 @@ async function client(params, otp) {
             </table>
         </body>
         </html>
-        
         `
     }, (error, result) => {
         if (error) return console.error(error);

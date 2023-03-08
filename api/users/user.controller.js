@@ -9,44 +9,20 @@ const { sign } = require("jsonwebtoken")
 
 module.exports = {
     createUser: (req, res) =>{
-        pool.query('SELECT * FROM users WHERE email = ? ', req.body.email, (err, user) => { 
-        if(user.length > 0){
-            return res.status(500).json({
-                error: 0,
-                message: "Email already exist"
+        if(req.body){
+            const body = req.body;
+            mailers.client(body)
+            return res.status(200).json({
+                success: 1,
+                status: 200,
+                message: "Request Submitted Successfully",
             })
         }else{
-            // generate otp
-            var otp = Math.random();
-            otp = otp * 1000000;
-            otp = parseInt(otp);
-            const body = req.body;
-            const salt = genSaltSync(10)
-            body.password = hashSync(body.password, salt)
-            let stringOtp = otp.toString();
-            body.verification_code = hashSync(stringOtp, salt)
-            body.verification_status = "pending"
-            mailers.client(body, otp)
-            create(body, (err, results) =>{
-                if(err){
-                    console.log(err)
-                    return res.status(500).json({
-                        error: 0,
-                        message: "Database connection error"
-                    })
-                }
-                return res.status(200).json({
-                    success: 1,
-                    status: 200,
-                    message: "Registration successful",
-                    id: results.insertId,
-                    email: body.email,
-                    data: results
-                })
+            return res.status(500).json({
+                error: 0,
+                message: "An error Occurred"
             })
-
         }
-    })
 
     },
 

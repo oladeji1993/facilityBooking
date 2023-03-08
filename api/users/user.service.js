@@ -5,28 +5,26 @@ module.exports = ({
     create: (data, callback) => {
         pool.query(
             `insert into users(
-                user_name,
-                first_name, 
-                last_name,
-                email,
-                phonenumber, 
-                password,
-                verification_code, 
-                terms, 
-                newsletter,
-                verification_status)
-            values(?,?,?,?,?,?,?,?,?,?)`,
+                event_title, 
+                event_day,
+                event_date,
+                requester,
+                start_time,
+                end_time,
+                participants,
+                date_requested,
+                
+                )
+            values(?,?,?,?,?,?,?,?)`,
             [
-                data.user_name,
-                data.first_name,
-                data.last_name,
-                data.email,
-                data.phonenumber,
-                data.password,
-                data.verification_code,
-                data.terms,
-                data.newsletter,
-                data.verification_status
+                data.event_title,
+                data.event_day,
+                data.event_date,
+                data.requester,
+                data.start_time,
+                data.end_time,
+                data.participants,
+                data.date_requested,
             ],
             (error, results, fields) =>{
                 if(error){
