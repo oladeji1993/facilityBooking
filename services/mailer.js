@@ -14,7 +14,7 @@ async function client(params) {
         secure: true,
         auth: {
             user: 'info@snowfoxng.com', 
-            pass: 'Newaccess@2021'
+            pass: process.env.MAIL_PASSWORD
         },
     }));
 
@@ -148,6 +148,7 @@ async function client(params) {
                                     <b>Start Time</b>: ${params.start_time}<br>
                                     <b>End Time</b>: ${params.end_time}<br>
                                     <b>No of Participants</b>: ${params.participants}<br>
+                                    <b>Phone Number</b>: ${params.phone}<br>
                                     <b>Date Requested</b>: ${params.date_requested}<br>
                                 </p>
                             </td>

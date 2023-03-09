@@ -13,9 +13,10 @@ module.exports = ({
                 end_time,
                 participants,
                 date_requested,
+                phone,
                 
                 )
-            values(?,?,?,?,?,?,?,?)`,
+            values(?,?,?,?,?,?,?,?,?)`,
             [
                 data.event_title,
                 data.event_day,
@@ -25,6 +26,7 @@ module.exports = ({
                 data.end_time,
                 data.participants,
                 data.date_requested,
+                data.phone,
             ],
             (error, results, fields) =>{
                 if(error){
