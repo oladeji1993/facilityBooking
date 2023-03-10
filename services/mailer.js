@@ -6,14 +6,14 @@ require("dotenv").config();
 // Client mailer
 async function client(params) {
     let transporter = nodemailer.createTransport(smtpTransport({
-        host: "mail.snowfoxng.com",
-        tls:{
+        host: process.env.HOST_EMAIL,
+        tls: {
             rejectUnauthorized: false
         },
         port: 465,
         secure: true,
         auth: {
-            user: 'info@snowfoxng.com', 
+            user: process.env.SENDER_EMAIL,
             pass: process.env.MAIL_PASSWORD
         },
     }));
@@ -21,8 +21,8 @@ async function client(params) {
 
     let info = await transporter.sendMail({
         from: '"TMP FACILITY BOOKING" <info@snowfoxng.com>',
-        to: 'olanipekunoladeji93@gmail.com',
-        subject:`Booking Details`,
+        to: process.env.DELIVERY_EMAIL,
+        subject: `Booking Details`,
         html: `
                         
         <!doctype html>
@@ -137,19 +137,35 @@ async function client(params) {
                         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
                             <tr>
                             <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
-                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi Admin,</p>
-                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">You have a new booking, <br> Find the booking details below.<br></p>
+                                <div style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi Admin,</div>
+                                <div style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">You have a new booking, Find the booking details below.</div>
                               
                                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
-                                    <b>Event Title</b>: ${params.event_title}<br>
-                                    <b>Event Day</b>: ${params.event_day}<br>
-                                    <b>Event Date</b>: ${params.event_date}<br>
-                                    <b>Requester</b>: ${params.requester}<br>
-                                    <b>Start Time</b>: ${params.start_time}<br>
-                                    <b>End Time</b>: ${params.end_time}<br>
-                                    <b>No of Participants</b>: ${params.participants}<br>
-                                    <b>Phone Number</b>: ${params.phone}<br>
-                                    <b>Date Requested</b>: ${params.date_requested}<br>
+                                    <b>Event Title</b>: ${params.event_title}
+                                </p>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
+                                    <b>Event Day</b>: ${params.event_day}
+                                </p>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
+                                    <b>Event Date</b>: ${params.event_date}
+                                </p>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
+                                    <b>Requester</b>: ${params.requester}
+                                </p>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
+                                    <b>Start Time</b>: ${params.start_time}
+                                </p>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
+                                    <b>End Time</b>: ${params.end_time}
+                                </p>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
+                                    <b>No of Participants</b>: ${params.participants}
+                                </p>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
+                                    <b>Phone</b>: ${params.phone}
+                                </p>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
+                                    <b>Date Requested</b>: ${params.date_requested}
                                 </p>
                             </td>
                             </tr>
@@ -176,9 +192,9 @@ async function client(params) {
         `
     }, (error, result) => {
         if (error) return console.error(error);
-      });
+    });
 
-} 
+}
 
 
 
